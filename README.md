@@ -1,5 +1,5 @@
 # tf-cpu-type-diff
-Demonstrate different results with Tensorflow on Intel and AMD CPUs
+**Demonstrate different results with Tensorflow on Intel and AMD CPUs**
 
 This program demonstrates that running identical machine learning processing on Intel and AMD CPUs yields slightly different results. 
 
