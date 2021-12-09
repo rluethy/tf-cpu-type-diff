@@ -5,7 +5,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.5.2
+#       jupytext_version: 1.13.0
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -51,7 +51,8 @@ def gen_iterator_rand(mini_batch_size, dataset, labels):
 
 # +
 CPUtype = getCPUtype()
-print("CPU type:", CPUtype)
+TFVersion = tf.__version__
+print("CPU type:", CPUtype, "Tensorflow:", TFVersion)
 
 train_df = pd.read_csv("training_data.csv", index_col=0)
 val_df = pd.read_csv("validation_data.csv", index_col=0)
@@ -133,19 +134,21 @@ for i in range(start_iter, iteration):
 logfile.close()
 val_df["prob_1"] = model.predict(val_df.drop(["truth"], axis=1).values)[:,1]
 #display(val_df)
-val_df.to_csv(f"val_preds_{CPUtype}.csv")
+val_df.to_csv(f"val_preds_{CPUtype}_TF{TFVersion}.csv")
 
 # ! diff -s batches_AMD.log batches_Intel.log 
 
 # ### Plot Intel vs. AMD
 
-if os.path.exists("val_preds_AMD.csv") and os.path.exists("val_preds_Intel.csv"):
-    amd = pd.read_csv("val_preds_AMD.csv")
-    intel = pd.read_csv("val_preds_Intel.csv")
+AMDfile = f"val_preds_AMD_TF{TFVersion}.csv"
+IntelFile = f"val_preds_Intel_TF{TFVersion}.csv"
+if os.path.exists(AMDfile) and os.path.exists(IntelFile):
+    amd = pd.read_csv(AMDfile)
+    intel = pd.read_csv(IntelFile)
     print((intel["prob_1"] - amd["prob_1"]).abs().sort_values(ascending=False).head(10))
     fg = plt.figure(figsize=(8,8))
     plt.scatter(intel["prob_1"], amd["prob_1"])
-    plt.title("Prob 1")
+    plt.title(f"Tensorflow {TFVersion}, Prob 1")
     plt.xlabel("Intel")
     plt.ylabel("AMD")
     plt.show()
