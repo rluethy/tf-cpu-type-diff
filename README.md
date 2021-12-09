@@ -27,12 +27,12 @@ The resulting differences are shown below:
     cd tf-cpu-type-diff/
     python3 TF_CPU_types_V3.py
     ```
-  - download the output file `val_preds_Intel.csv`
+  - download the output file `val_preds_Intel_TF2.5.0.csv`
 
 2 start an EC2 instance with AMD CPU
 
   - for example t3a.medium instance type and AMI ami-053ac55bdcfe96e85
   - log into instance and run the same commands as above
-  - download the output file `val_preds_AMD.csv`
+  - download the output file `val_preds_AMD_TF2.5.0.csv`
 
-3 compare the prob_1 column in files `val_preds_Intel.csv` from step 1 and `val_preds_AMD.csv` from step 2
+3 compare the prob_1 column in files `val_preds_Intel_TF2.5.0.csv` from step 1 and `val_preds_AMD_TF2.5.0.csv` from step 2
