@@ -28,7 +28,7 @@ import tensorflow as tf
 from tensorflow.keras import Model
 from tensorflow.keras.layers import BatchNormalization, Dense, Softmax
 
-pd.set_option("display.float_format", '{:.3f}'.format)
+pd.set_option("display.float_format", '{:.6f}'.format)
 # +
 def getCPUtype():
     cpuinfo = subprocess.check_output("cat /proc/cpuinfo", shell=True).decode()
