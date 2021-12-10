@@ -52,7 +52,8 @@ def gen_iterator_rand(mini_batch_size, dataset, labels):
 # +
 CPUtype = getCPUtype()
 TFVersion = tf.__version__
-print("CPU type:", CPUtype, "Tensorflow:", TFVersion)
+policy = tf.keras.mixed_precision.global_policy()
+print("CPU type:", CPUtype, "; Tensorflow:", TFVersion, "; mixed precision policy:", policy)
 
 train_df = pd.read_csv("training_data.csv", index_col=0)
 val_df = pd.read_csv("validation_data.csv", index_col=0)
